@@ -1,6 +1,6 @@
-const config = require('../config/auth.config');
+const config = require('../config/config.json');
 var jwt = require("jsonwebtoken");
-const messages = require('../controllers/response_messages/message')
+// const messages = require('../controllers/response_messages/message')
 
 const verifyUser = (request,response,next) => {
   let token = request.headers.authorization.split(" ")[1];
@@ -16,7 +16,7 @@ const verifyUser = (request,response,next) => {
         message: messages.unauthorized
       });
     }
-    request.id = decoded.id;
+    request.userId = decoded.id;
     next();
   });
 }

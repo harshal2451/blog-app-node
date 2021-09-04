@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const Users = sequelize.define(
-    "users_user",
+    "users",
     {
       id: {
         allowNull: false,
@@ -22,22 +22,6 @@ module.exports = (sequelize, Sequelize) => {
       full_name: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        defaultValue: null
-      },
-      status: {
-        type: Sequelize.BOOLEAN,
-        defaultValue:true
-      },
-      skipOnBoarding : {
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
-      },
-      verified:{
-        type: Sequelize.BOOLEAN,
-        defaultValue: false
       },
       deletedAt : {
         allowNull: true,
