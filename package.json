@@ -1,0 +1,37 @@
+{
+  "name": "mis-tracker-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.931.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "cron": "^1.8.2",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.0",
+    "generate-password": "^1.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.5.0",
+    "nodemon": "^2.0.7",
+    "password-generator": "^2.3.2",
+    "read-excel-file": "^5.1.0",
+    "redis": "^3.1.1",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "zlib": "^1.0.5"
+  }
+}
