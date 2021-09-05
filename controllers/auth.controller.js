@@ -31,11 +31,11 @@ const signup = async (request, response) => {
       if (!newUser) return response
         .status(400)
         .send({ success: false, message: response_messages.s_wrong });
-      
+
       return response
-        .status(400)
+        .status(200)
         .send({ success: true, message: response_messages.u_added });
-     
+
     } else {
       return response
         .status(400)
@@ -54,16 +54,15 @@ const login = async (request, response) => {
     if (!oldUser) return response.status(400).json({ success: false, message: response_messages.u_not_exist });
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
     if (!isPasswordCorrect) return response.status(400).json({ success: false, message: response_messages.invalid_credentials });
-    const user = await Users.findOne({ where: { email }, attributes: ['id', 'email', 'full_name']})
-    if (!user) return response.status(200).send({ success: false, message: response_messages.u_not_found });   
+    const user = await Users.findOne({ where: { email }, attributes: ['id', 'email', 'full_name'] })
+    if (!user) return response.status(200).send({ success: false, message: response_messages.u_not_found });
     const token = jwt.sign({ id: user.id }, config.secret);
     user.dataValues.token = token
-     return response.status(200).send({
+    return response.status(200).send({
       success: true, response_data: user,
     });
   }
   catch (err) {
-    console.log(err);
     return response.status(500).send({ success: false, message: err.message });
   };
 }

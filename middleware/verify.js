@@ -4,7 +4,6 @@ const messages = require('../controllers/response_messages/message')
 
 const verifyUser = (request, response, next) => {
   let token = request.headers.authorization.split(" ")[1];
-  console.log(token);
   if (!token) {
     return response.status(401).send({
       message: messages.unauthorized

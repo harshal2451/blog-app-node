@@ -9,7 +9,7 @@ const createBlog = async (request, response) => {
     const blog = await Blogs.create({
       blog_title,
       blog_description,
-      blog_url,
+      blog_url: "",
       user_id: userId
     })
     if (!blog) return response.status(400).send({ success: false, message: err.message })
@@ -73,24 +73,21 @@ const updateBlogs = async (request, response) => {
     const { userId } = request;
     const { blog_title, blog_description, blog_url } = request.body;
 
-    const verifyBlogs = await Blogs.findOne({ where: { user_id:userId, id } });
+    const verifyBlogs = await Blogs.findOne({ where: { user_id: userId, id } });
     if (!verifyBlogs) {
       return response
         .status(400)
         .send({ success: false, message: response_messages.b_updateVerify });
     }
 
-    let condition = {};
-    if (blog_title) condition.blog_title = blog_title;
-    if (blog_description) condition.blog_description = blog_description;
-    if (blog_url) condition.blog_url = blog_url;
-    const client = await Blogs.update(condition, {
+
+    const client = await Blogs.update(request.body, {
       where: { id },
     });
     if (client[0] == 0)
       return response
         .status(400)
-        .send({ success: false, message: err.message });
+        .send({ success: false, message: response_messages.s_wrong });
     return response
       .status(200)
       .send({
@@ -111,7 +108,7 @@ const deleteBlogs = async (request, response) => {
         .status(400)
         .send({ success: false, message: err.message });
     }
-    const verifyBlogs = await Blogs.findOne({ where: {user_id: userId, id } });
+    const verifyBlogs = await Blogs.findOne({ where: { user_id: userId, id } });
     if (!verifyBlogs) {
       return response
         .status(400)
