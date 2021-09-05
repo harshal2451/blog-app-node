@@ -81,10 +81,10 @@ const updateBlogs = async (request, response) => {
     }
 
 
-    const client = await Blogs.update(request.body, {
+    const blog = await Blogs.update(request.body, {
       where: { id },
     });
-    if (client[0] == 0)
+    if (blog[0] == 0)
       return response
         .status(400)
         .send({ success: false, message: response_messages.s_wrong });
