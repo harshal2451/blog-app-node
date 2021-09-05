@@ -4,10 +4,11 @@ const response_messages = require("./response_messages/message");
 
 const createBlog = async (request, response) => {
   try {
-    const { blog_title, blog_description } = request.body;
-    const blog = await blog.create({
+    const { blog_title, blog_description, blog_url } = request.body;
+    const blog = await Blogs.create({
       blog_title,
       blog_description,
+      blog_url
     })
     if (!blog) return response.status(400).send({ success: false, message: err.message })
     return response.status(200).send({ success: true, message: response_messages.b_created.success, response_data: blog })

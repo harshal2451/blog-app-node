@@ -7,6 +7,7 @@ const response_messages = require("./response_messages/message");
 const bcrypt = require("bcrypt");
 
 
+
 const signup = async (request, response) => {
   try {
     const { email, password, full_name } = request.body;
@@ -32,6 +33,10 @@ const signup = async (request, response) => {
         .status(400)
         .send({ success: false, message: response_messages.s_wrong });
       
+      return response
+        .status(400)
+        .send({ success: true, message: response_messages.u_added });
+     
     } else {
       return response
         .status(400)
@@ -48,8 +53,6 @@ const login = async (request, response) => {
     const { email, password } = request.body
     const oldUser = await Users.findOne({ where: { email } });
     if (!oldUser) return response.status(400).json({ success: false, message: response_messages.u_not_exist });
-    const oldUser2 = await UORelation.findOne({ where: { user_id: oldUser.id, status: true } });
-    if (!oldUser2) return response.status(400).json({ success: false, message: response_messages.u_not_exist });
     const isPasswordCorrect = await bcrypt.compare(password, oldUser.password);
     if (!isPasswordCorrect) return response.status(400).json({ success: false, message: response_messages.invalid_credentials });
     const user = await getUserDetails(email)
