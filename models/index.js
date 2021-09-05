@@ -52,11 +52,11 @@ db.Blogs = require("./blog.model.js")(sequelize, Sequelize);
 
 db.Users.hasMany(db.Blogs, {
   foreignKey: "user_id",
-  as: "blogs",
+  as: "users",
 });
 
 db.Blogs.belongsTo(db.Users, {
-  foreignKey: "id",
+  foreignKey: "user_id",
   as: "users",
 });
 
